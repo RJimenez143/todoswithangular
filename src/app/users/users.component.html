@@ -1,0 +1,102 @@
+<div class="container  font-weight-lighter  w-50">
+    <div class="flex bg-indigo text-white p-2">
+      <h1>{{ title }}</h1>
+      <a class="btn btn-outline-dark ml-auto my-auto" routerLink="/todos"
+        >View Todos</a
+      >
+    </div>
+    <div class="row mb-2 d-flex justify-content-between ml-0">
+        <div class="col-3 p-0">
+          <input 
+            type="text"
+            class="form-control"
+            placeholder="Search..." 
+            [(ngModel)]="searchText" 
+            (keyup)="onSearch()"
+          >
+        </div>
+        <button class="btn btn-darkhh mr-3" (click)="openVerticallyCentered(content)">
+            New User
+          </button>
+      </div>
+    <div class="flex">
+      <span *ngIf="filteredData.length === 0">No result</span>
+      
+      <table  
+        class="w-1000 p-3 my-table box-shadow" 
+        *ngIf="filteredData.length > 0" class="table table-hover  border border-dark">
+        <thead class="bg-deep-orange lh-10 text-white" class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>FIRSTNAME</th>
+            <th>LASTNAME</th>
+            <th>OCCUPATION</th>
+            <th>TODOS</th>
+            <th>ACTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of filteredData">
+            <td>{{ user.id }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.occupation }}</td>
+            <td>
+              <a routerLink="/todos/{{ user.id }}" class="text-decoration-none">View Todos</a>
+            </td>
+            <td>
+              <button class= "btn btn-outline-dark btn-sm mr-3" (click)="onUpdate(user)">Update</button>
+            
+              <button class= "btn btn-outline-dark btn-sm" (click)="onDelete(user)">Delete</button>
+            </td>
+          </tr>
+          
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="p-2" colspan="6">
+              Showing {{ filteredData.length }} results of {{ userData.length }}.
+            </td>
+          </tr>
+          <tr *ngFor="let item of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+              <ng-template ngbPaginationPrevious>Prev</ng-template>
+              <ng-template ngbPaginationNext>Next</ng-template>
+            </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Add new user</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form>
+         <div class="form-group">
+           <label for="firstname">Firstname: </label>
+           <input type="text" class="form-control" placeholder="Enter firstname...">
+         </div>
+         <div class="form-group">
+          <label for="lastname">Lastname: </label>
+          <input type="text" class="form-control" placeholder="Enter lastname...">
+        </div>
+        <div class="form-group">
+          <label for="name">Occupation: </label>
+          <input type="text" class="form-control" placeholder="Enter occupation...">
+        </div>
+
+        <div class="form-group"> 
+          <label for="profilepicture" >Profile Picture:</label><br>
+          <input type="file" class="mb-3">
+
+        </div>
+       </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Save click')">Save</button>
+      </div>
+    </ng-template>
