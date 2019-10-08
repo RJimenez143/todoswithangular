@@ -1,0 +1,43 @@
+<ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Add new todo</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <form let row of rows>
+           <div class="form-group">
+             <label for="name">{{row.name}}</label>
+             <input type="text" class="form-control" [(ngModel)]="name" placeholder="Enter name...">
+           </div>
+           <div class="form-group">
+            <label for="name"></label>
+            <input type="text" class="form-control" placeholder="Enter description...">
+          </div>
+          <div class="form-group">
+            <label for="name"></label>
+            <input type="text" class="form-control" placeholder="Enter status...">
+          </div>
+          <div class="form-group">
+            <label for="name"></label>
+           <select class="form-control" id="todo-owner">
+            <option value="">Select Owner</option>
+             <option value="">User 1</option>
+             <option value="">User 2</option>
+             <option value="">User 3</option>
+             <option value="">User 4</option>
+             <option value="">User 5</option>
+            
+           </select>
+          </div>
+         </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="newTodo()">Save</button>
+        </div>
+      </ng-template>
+    
+    
+    
+      

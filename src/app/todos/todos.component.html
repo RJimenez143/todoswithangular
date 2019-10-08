@@ -1,8 +1,8 @@
-<div class="container font-weight-lighter w-50 ">
+<div class="container font-weight-lighter w-50">
 
     <div class="flex bg-indigo text-white p-2">
         <h1>{{ title }}</h1>
-        <a class="btn btn-outline-dark fr-50 mr-400" routerLink="/users"
+        <a class="btn btn-dark fr-50 mr-400" routerLink="/users"
           >View Users</a
         >
       </div>
@@ -64,47 +64,5 @@
     </div>
   </div>
 
-  <!-- add new todo form -->
-  <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title">Add new todo</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-     <form>
-       <div class="form-group">
-         <label for="name">Name: </label>
-         <input type="text" class="form-control" placeholder="Enter name...">
-       </div>
-       <div class="form-group">
-        <label for="name">Description: </label>
-        <input type="text" class="form-control" placeholder="Enter description...">
-      </div>
-      <div class="form-group">
-        <label for="name">Status: </label>
-        <input type="text" class="form-control" placeholder="Enter status...">
-      </div>
-      <div class="form-group">
-        <label for="name">Owner:</label>
-       <select class="form-control" id="todo-owner">
-        <option value="">Select Owner</option>
-         <option value="">User 1</option>
-         <option value="">User 2</option>
-         <option value="">User 3</option>
-         <option value="">User 4</option>
-         <option value="">User 5</option>
-        
-       </select>
-      </div>
-     </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Save click')">Save</button>
-    </div>
-  </ng-template>
-
-  <!-- update todo form -->
-
+ 
   

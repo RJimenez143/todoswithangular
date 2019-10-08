@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UsersService } from './users.service';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -11,98 +12,15 @@ export class UsersComponent implements OnInit {
   title = 'Users';
 
   searchText: string;
-
-  userData = [
-    {
-      id: "1",
-      firstName: "Riche",
-      lastName: "Jimenez",
-      occupation: "Software Engineer",
-      profilePicture:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
-    },
-    {
-      id: "2",
-      firstName: "Rolito",
-      lastName: "Valles",
-      occupation: "Software Engineer",
-      profilePicture:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
-    },
-    {
-      id: "3",
-      firstName: "Vannesa",
-      lastName: "Pasaan",
-      occupation: "Manager",
-      profilePicture:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
-    },
-    {
-      id: "4",
-      firstName: "Karen",
-      lastName: "Carabuena",
-      occupation: "Software Engineer",
-      profilePicture:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
-    },
-    {
-      id: "5",
-      firstName: "Jayson",
-      lastName: "Custodio",
-      occupation: "Software Tester",
-      profilePicture:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
-    }
-    // {
-    //   id: "6",
-    //   firstName: "Adrian",
-    //   lastName: "Sumagang",
-    //   occupation: "Manager",
-    //   profilePicture:
-    //     "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
-    // },
-    // {
-    //   id: "7",
-    //   firstName: "John",
-    //   lastName: "Ebarita",
-    //   occupation: "Manager",
-    //   profilePicture:
-    //     "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
-    // },
-    // {
-    //   id: "8",
-    //   firstName: "Kerr",
-    //   lastName: "Opora",
-    //   occupation: "Manager",
-    //   profilePicture:
-    //     "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
-    // },
-    // {
-    //   id: "9",
-    //   firstName: "Noel",
-    //   lastName: "Rondina",
-    //   occupation: "Manager",
-    //   profilePicture:
-    //     "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
-    // },
-    // {
-    //   id: "10",
-    //   firstName: "Jayson",
-    //   lastName: "Mancao",
-    //   occupation: "General Manager",
-    //   profilePicture:
-    //     "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
-    // }
-  ];
-
   filteredData: any[];
 
   constructor(
     private router: Router, 
     private activatedRoute: ActivatedRoute,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private service: UsersService
   ) {
-    this.filteredData = this.userData;
+    this.filteredData = this.service.getUsers();
   }
 
   ngOnInit() {
@@ -117,7 +35,7 @@ export class UsersComponent implements OnInit {
 
         if (userId) {
           // Filter todos by owner (user id)
-          this.filteredData = this.userData.filter((user) => {
+          this.filteredData = this.service.getUsers().filter((user) => {
             return user.id === userId;
           });
         }
@@ -130,14 +48,14 @@ export class UsersComponent implements OnInit {
     const searchText = this.searchText.toLowerCase();
 
     if (searchText) {
-      this.filteredData = this.userData.filter((user) => {
+      this.filteredData = this.service.getUsers().filter((user) => {
         return user.firstName.toLowerCase().includes(searchText) ||
           user.lastName.toLowerCase().includes(searchText) ||
           user.occupation.toLowerCase().includes(searchText);
       });
     }
     else {
-      this.filteredData = this.userData;
+      this.filteredData = this.service.getUsers();
     }
   }
 

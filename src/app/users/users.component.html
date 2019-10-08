@@ -1,7 +1,7 @@
 <div class="container  font-weight-lighter  w-50">
     <div class="flex bg-indigo text-white p-2">
       <h1>{{ title }}</h1>
-      <a class="btn btn-outline-dark ml-auto my-auto" routerLink="/todos"
+      <a class="btn btn-dark ml-auto my-auto" routerLink="/todos"
         >View Todos</a
       >
     </div>
@@ -15,7 +15,7 @@
             (keyup)="onSearch()"
           >
         </div>
-        <button class="btn btn-darkhh mr-3" (click)="openVerticallyCentered(content)">
+        <button class="btn btn-dark mr-3" (click)="openVerticallyCentered(content)">
             New User
           </button>
       </div>
@@ -55,13 +55,9 @@
         <tfoot>
           <tr>
             <td class="p-2" colspan="6">
-              Showing {{ filteredData.length }} results of {{ userData.length }}.
+              Showing{{ filteredData.length}} results of {{ userData.length }}.
             </td>
           </tr>
-          <tr *ngFor="let item of items | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-              <ng-template ngbPaginationPrevious>Prev</ng-template>
-              <ng-template ngbPaginationNext>Next</ng-template>
-            </tr>
         </tfoot>
       </table>
     </div>
@@ -100,3 +96,5 @@
         <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Save click')">Save</button>
       </div>
     </ng-template>
+
+    
