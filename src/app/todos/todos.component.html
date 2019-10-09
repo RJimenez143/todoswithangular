@@ -1,68 +1,82 @@
 <div class="container font-weight-lighter w-50">
-
-    <div class="flex bg-indigo text-white p-2">
-        <h1>{{ title }}</h1>
-        <a class="btn btn-dark fr-50 mr-400" routerLink="/users"
-          >View Users</a
-        >
-      </div>
-  
-    <div class="row mb-2 d-flex justify-content-between ml-0">
-      <div class="col-3 p-0">
-        <input 
-          type="text"
-          class="form-control"
-          placeholder="Search..." 
-          [(ngModel)]="searchText" 
-          (keyup)="onSearch()"
-        >
-      </div>
-      <button class="btn btn-dark mr-3" (click)="openVerticallyCentered(content)">
-        New Todo
-      </button>
-      
-    </div>
-    
-    <div class="w-40">
-      <table 
-      class="table table-hover border border-dark"
-        *ngIf="filteredData.length > 0"
-      >
-        <thead class="thead-dark">
-          <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>DESCRIPTION</th>
-            <th>STATUS</th>
-            <th>OWNER</th>
-            <th>ACTION</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let todo of filteredData">
-            <td>{{todo.id}}</td>
-            <td>{{ todo.name }}</td>
-            <td>{{ todo.description }}</td>
-            <td>{{ todo.status }}</td>
-            <td>{{todo.owner}}</td>
-            <td>
-              <button class= "btn btn-outline-dark btn-sm  mr-3" (click)="onUpdate(todo)" >Update</button>
-        
-              <button class= "btn btn-outline-dark btn-sm" (click)="onDelete(todo)">Delete</button>
-            </td>
-          </tr>
-          
-        </tbody>
-        <tfoot>
-            <tr>
-              <td class="p-2" colspan="6">
-                Showing {{ filteredData.length }} results of {{ todoData.length }}.
-              </td>
-            </tr>
-          </tfoot>
-      </table>
-    </div>
+  <div class="flex bg-indigo text-white p-2">
+    <h1>{{ title }}</h1>
+    <a class="btn btn-dark fr-50 mr-400" routerLink="/users">View Users</a>
   </div>
 
- 
-  
+  <div class="row mb-2 d-flex justify-content-between ml-0">
+    <div class="col-3 p-0">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search..."
+        [(ngModel)]="searchText"
+        (keyup)="onSearch()"
+      />
+    </div>
+    <button class="btn btn-dark mr-3" (click)="onUpdate()">
+      New Todo
+    </button>
+  </div>
+
+  <div class="w-40">
+    <table
+      class="table table-hover border border-dark"
+      *ngIf="filteredData.length > 0"
+    >
+      <thead class="thead-dark">
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>DESCRIPTION</th>
+          <th>STATUS</th>
+          <th>OWNER</th>
+          <th>ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let todo of filteredData">
+          <td>{{ todo.id }}</td>
+          <td>{{ todo.name }}</td>
+          <td>{{ todo.description }}</td>
+          <td>{{ todo.status }}</td>
+          <td>{{ todo.owner }}</td>
+          <td>
+            <button
+              class="btn btn-outline-dark btn-sm  mr-3"
+              (click)="onUpdate(todo)"
+            >
+              Update
+            </button>
+
+            <button
+              class="btn btn-outline-dark btn-sm"
+              (click)="onDelete(todo)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="p-2" colspan="6">
+            <!-- Showing {{ filteredData.length }} results of
+            {{ filteredData.length }}. -->
+            <ngb-pagination
+              [(page)]="page"
+              [pageSize]="pageSize"
+              [collectionSize]="collectionSize"
+              (pagechange)="onSearch()"
+              [directionLinks]="true">
+             
+            </ngb-pagination>
+          
+
+       
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

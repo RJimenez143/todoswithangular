@@ -8,6 +8,12 @@ import { UsersModule } from './users/users.module';
 import { TodosModule } from './todos/todos.module';
 import { TodoModule } from './todo/todo.module';
 import { UserModule } from './user/user.module';
+import { NgbModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { UsersService } from './users/users.service';
+import { TodoService } from './todos/service/todo.service';
+import { TodosRoutingModule } from './todos/todos-routing.module';
+import { UsersRoutingModule } from './users/users-routing.module';
+import { ToastService } from './app/toast.service';
 
 @NgModule({
   declarations: [
@@ -19,10 +25,14 @@ import { UserModule } from './user/user.module';
     AppRoutingModule,
     UsersModule,
     TodosModule,
-    TodoModule,
-    UserModule
+    UsersModule,
+    NgbModule,
+    TodosRoutingModule,
+    UsersRoutingModule,
+    NgbToastModule
   ],
-  providers: [],
+  providers: [UsersService, TodoService, ToastService],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }

@@ -15,7 +15,7 @@
             (keyup)="onSearch()"
           >
         </div>
-        <button class="btn btn-dark mr-3" (click)="openVerticallyCentered(content)">
+        <button class="btn btn-dark mr-3" (click)="onUpdate()">
             New User
           </button>
       </div>
@@ -55,7 +55,16 @@
         <tfoot>
           <tr>
             <td class="p-2" colspan="6">
-              Showing{{ filteredData.length}} results of {{ userData.length }}.
+              <!-- Showing {{ filteredData.length}} results of {{ filteredData.length }}. -->
+              <ngb-pagination
+              [(page)]="page"
+              [pageSize]="pageSize"
+              [collectionSize]="collectionSize"
+              (pagechange)="onPageChange()"
+              [directionLinks]="true"
+            >
+             
+            </ngb-pagination>
             </td>
           </tr>
         </tfoot>
@@ -63,38 +72,4 @@
     </div>
   </div>
 
-  <ng-template #content let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title">Add new user</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       <form>
-         <div class="form-group">
-           <label for="firstname">Firstname: </label>
-           <input type="text" class="form-control" placeholder="Enter firstname...">
-         </div>
-         <div class="form-group">
-          <label for="lastname">Lastname: </label>
-          <input type="text" class="form-control" placeholder="Enter lastname...">
-        </div>
-        <div class="form-group">
-          <label for="name">Occupation: </label>
-          <input type="text" class="form-control" placeholder="Enter occupation...">
-        </div>
-
-        <div class="form-group"> 
-          <label for="profilepicture" >Profile Picture:</label><br>
-          <input type="file" class="mb-3">
-
-        </div>
-       </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.dismiss('Save click')">Save</button>
-      </div>
-    </ng-template>
-
-    
+ 

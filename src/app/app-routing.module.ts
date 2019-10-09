@@ -8,37 +8,12 @@ import { UserComponent } from './user/user.component';
 const routes: Routes = [
   {
     path: 'users',
-    component: UsersComponent
+    loadChildren: './users/users.module#UsersModule'
   },
   {
     path: 'todos',
-    component: TodosComponent
+    loadChildren: './todos/todos.module#TodosModule'
   },
-  {
-    path: 'todos/:userId',
-    component: TodosComponent
-  },
-  {
-    path: 'todo/:id',
-    component: TodoComponent
-  },
-  {
-    path: 'todo/new',
-    component: TodoComponent
-  },
-  {
-    path: 'users/:userId',
-    component: UsersComponent
-  },
-  {
-    path: 'user/:id',
-    component: UserComponent
-  },
-  {
-    path: 'user/new',
-    component: UserComponent
-  },
-
 
   {
     path: '',

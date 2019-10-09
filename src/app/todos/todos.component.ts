@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params, ParamMap } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TodoService } from './service/todo.service';
+import { UpdateModalComponent } from './update-modal/update-modal.component';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import { Todos } from './model/todos';
 
 @Component({
   selector: 'app-todos',
@@ -11,10 +14,13 @@ import { TodoService } from './service/todo.service';
 export class TodosComponent implements OnInit {
 
   title = 'Todos';
-
   searchText: string;
   filteredData: any[];
- 
+  collectionSize: number=3;
+  pageSize: number = 2;
+  page: number=1;
+  todoLength: number;
+  todos: Todos[];
 
   constructor(
     private router: Router, 
@@ -29,6 +35,7 @@ export class TodosComponent implements OnInit {
     console.log('[TodosComponent] On Init!');
 
     // Get the user id from URL
+   
     this.activatedRoute.paramMap.subscribe(
       // Callback function
       (paramMap: ParamMap) => {
@@ -59,13 +66,20 @@ export class TodosComponent implements OnInit {
     }
   }
 
-  onUpdate(todo) {
-    const index = this.filteredData.indexOf(todo.id);
-    this.filteredData.push(index,1);
+  onUpdate(todo: Todos) {
+    const modal=this.modalService.open(UpdateModalComponent);
+    modal.componentInstance.todo = todo;
+
+    console.log(todo);
+
+    modal.result.then(result => {
+      
+    })
+    
    
   }
 
-  onDelete(todo) {
+  onDelete(todo: Todos) {
     const index = this.filteredData.indexOf(todo);
     this.filteredData.splice(index, 1);
   
@@ -75,15 +89,4 @@ export class TodosComponent implements OnInit {
     this.modalService.open(content, { centered: true });
   }
 
-  public id: number;
-  public name: string;
-  public year: number;
-  public rows: Array<{id: number, name: string, year: number}> = [];
-
-  newTodo() {
-    this.rows.push( {id: this.id, name: this.name, year: this.year } );
-
-    
-
-  }
 }

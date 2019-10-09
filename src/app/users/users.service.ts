@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Users } from './model/users';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+  firstName: string;
+  lastName: string;
+  occupation: string;
+  profilePicture: string;
 
   constructor() { }
   userData = [
@@ -51,4 +56,37 @@ export class UsersService {
   getUsers(){
     return this.userData;
   }
+
+
+  onUpdate(user: Users): Users{
+    const found = this.getTodoById(user.id);
+    found.firstName = user.firstName;
+    found.lastName = user.lastName;
+    found.occupation = user.occupation;
+    found.profilePicture = user.profilePicture
+
+    return found;
+
+   }
+
+   getTodoById(id: string){
+     const found = this.userData.filter(foundTodo => {
+       return foundTodo.id = id;
+     })
+
+     return found[0];
+   }
+    
+   addUser(user: Users): Users{
+     //get the id of the last element of array todoData then add 1
+     let lastId: string = (parseInt(this.userData[this.userData.length - 1].id) + 1).toString();
+     user.id = lastId;
+     this.userData.push(user);
+     console.log(user);
+     return user;
+   }
+
+   deleteTodo(){
+
+   }
 }

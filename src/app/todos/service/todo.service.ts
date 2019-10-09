@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Todos } from '../model/todos';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-
+  name: string;
+  description: string;
+  status: string;
+  owner: string;
   constructor() { }
 
   todoData = [
@@ -49,5 +53,36 @@ export class TodoService {
   ];
     getTodos(){
       return this.todoData;
+    }
+    
+    onUpdate(todo: Todos): Todos{
+     const found = this.getTodoById(todo.id);
+     found.name = todo.name;
+     found.description = todo.description;
+     found.owner = todo.owner;
+
+     return found;
+
+    }
+
+    getTodoById(id: string){
+      const found = this.todoData.filter(foundTodo => {
+        return foundTodo.id = id;
+      })
+
+      return found[0];
+    }
+     
+    addTodo(todo: Todos): Todos{
+      //get the id of the last element of array todoData then add 1
+      let lastId: string = (parseInt(this.todoData[this.todoData.length - 1].id) + 1).toString();
+      todo.id = lastId;
+      this.todoData.push(todo);
+      console.log(todo);
+      return todo;
+    }
+
+    deleteTodo(){
+
     }
   }
