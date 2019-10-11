@@ -19,10 +19,11 @@
     </button>
   </div>
 
-  <div class="w-40">
+  <div class="flex">
+    <span *ngIf="todos.length === 0">No results found . . .</span>
     <table
       class="table table-hover border border-dark"
-      *ngIf="filteredData.length > 0"
+      *ngIf="todos.length > 0"
     >
       <thead class="thead-dark">
         <tr>
@@ -35,7 +36,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let todo of filteredData">
+        <tr *ngFor="let todo of todos">
           <td>{{ todo.id }}</td>
           <td>{{ todo.name }}</td>
           <td>{{ todo.description }}</td>
@@ -61,19 +62,13 @@
       <tfoot>
         <tr>
           <td class="p-2" colspan="6">
-            <!-- Showing {{ filteredData.length }} results of
-            {{ filteredData.length }}. -->
             <ngb-pagination
-              [(page)]="page"
-              [pageSize]="pageSize"
               [collectionSize]="collectionSize"
-              (pagechange)="onSearch()"
-              [directionLinks]="true">
-             
-            </ngb-pagination>
-          
-
-       
+              [pageSize]="pageSize"
+              [(page)]="page"
+              (pageChange)="onPageChange()"
+              [directionLinks]="true"
+            ></ngb-pagination>
           </td>
         </tr>
       </tfoot>

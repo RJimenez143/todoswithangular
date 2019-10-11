@@ -11,6 +11,7 @@ import { TodosRoutingModule } from './todos-routing.module';
 
 
 
+
 @NgModule({
   declarations: [TodosComponent,
   UpdateModalComponent,
@@ -21,7 +22,8 @@ import { TodosRoutingModule } from './todos-routing.module';
     FormsModule,
     RouterModule,
     NgbModule,
-    TodosRoutingModule
+    TodosRoutingModule,
+    
   
   ],
   entryComponents:[
